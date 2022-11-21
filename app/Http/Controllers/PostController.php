@@ -29,4 +29,21 @@ class PostController extends Controller
         $post = Post::find($id);
         return view('post.edit', compact('post'));
     }
+
+    public function store (Request $request)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'content' => 'required'
+        ]);
+
+        $post = new Post([
+            'subject' => $request->get('subject'),
+            'content' => $request->get('content')
+        ]);
+
+        $post->save();
+
+        return redirect('/post');
+    }
 }

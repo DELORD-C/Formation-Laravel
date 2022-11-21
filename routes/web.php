@@ -24,5 +24,7 @@ Route::prefix('/post')->group(function() {
        Route::get('/create', 'create');
        Route::get('/{id}', 'show');
        Route::get('/{id}/edit', 'edit');
+
+       Route::post('/', 'store');
    });
 });

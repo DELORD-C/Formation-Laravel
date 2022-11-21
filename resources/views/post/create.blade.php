@@ -11,7 +11,7 @@
         <div>
             <a></a>
         </div>
-        <form method="POST">
+        <form method="POST" action="{{ url('post') }}">
             @csrf
             <input type="text" id="subject" name="subject">
             <input type="text" id="content" name="content">
