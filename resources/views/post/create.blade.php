@@ -7,12 +7,18 @@
         <h1>Create Post</h1>
     </div>
     <div>
-        <a href="{{ url('/post') }}">Back</a>
+        <a class="btn btn-info" href="{{ url('/post') }}">Back</a>
     </div>
     <form method="POST" action="{{ url('/post') }}">
         @csrf
-        <input type="text" id="subject" name="subject">
-        <input type="text" id="content" name="content">
-        <button type="submit">Submit</button>
+        <div class="form-group mb-3">
+            <label for="subject">Subject :</label>
+            <input type="text" id="subject" name="subject">
+        </div>
+        <div class="form-group mb-3">
+            <label for="content">Content :</label>
+            <input type="text" id="content" name="content">
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 @endsection

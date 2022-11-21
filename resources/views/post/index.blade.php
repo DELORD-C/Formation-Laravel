@@ -3,13 +3,15 @@
 @section('title')Post List @endsection
 
 @section('content')
-    <div>
-        <h1>Post List</h1>
+    <div class="row">
+        <div class="col-lg-11">
+            <h1>Post List</h1>
+        </div>
+        <div class="col-lg-1">
+            <a class="btn btn-success" href="{{ url('/post/create') }}">Add New</a>
+        </div>
     </div>
-    <div>
-        <a href="{{ url('/post/create') }}">Add New</a>
-    </div>
-    <table>
+    <table class="table table-bordered">
         <tr>
             <th>Subject</th>
             <th>Content</th>
@@ -20,12 +22,12 @@
                 <td>{{ $post->subject }}</td>
                 <td>{{ $post->content }}</td>
                 <td>
-                    <a href="{{ url('/post/' . $post->id) }}">Show</a>
-                    <a href="{{ url('/post/' . $post->id . "/edit") }}">Edit</a>
                     <form method="POST" action="{{ url('/post/' . $post->id) }}">
+                        <a class="btn btn-info" href="{{ url('/post/' . $post->id) }}">Show</a>
+                        <a class="btn btn-primary" href="{{ url('/post/' . $post->id . "/edit") }}">Edit</a>
                         @method('DELETE')
                         @csrf
-                        <button type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>

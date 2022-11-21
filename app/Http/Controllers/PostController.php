@@ -44,7 +44,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect('/post');
+        return redirect('/post')->with('success', 'Post successfully created');
     }
 
     public function update (Request $request, $id)
@@ -60,7 +60,7 @@ class PostController extends Controller
 
         $post->update();
 
-        return redirect('/post');
+        return redirect('/post')->with('success', 'Post successfully updated');
     }
 
     public function delete($id)
@@ -68,6 +68,6 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return redirect('/post');
+        return redirect('/post')->with('success', 'Post successfully deleted');
     }
 }
