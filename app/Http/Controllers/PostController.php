@@ -20,13 +20,13 @@ class PostController extends Controller
 
     public function show($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('post.show', compact('post'));
     }
 
     public function edit($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         return view('post.edit', compact('post'));
     }
 
@@ -54,7 +54,7 @@ class PostController extends Controller
             'content' => 'required'
         ]);
 
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->subject = $request->get('subject');
         $post->content = $request->get('content');
 
@@ -65,7 +65,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $post = Post::find($id);
+        $post = Post::findOrFail($id);
         $post->delete();
 
         return redirect('/post');
