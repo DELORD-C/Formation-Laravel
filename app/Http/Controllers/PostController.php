@@ -46,4 +46,28 @@ class PostController extends Controller
 
         return redirect('/post');
     }
+
+    public function update (Request $request, $id)
+    {
+        $request->validate([
+            'subject' => 'required',
+            'content' => 'required'
+        ]);
+
+        $post = Post::find($id);
+        $post->subject = $request->get('subject');
+        $post->content = $request->get('content');
+
+        $post->update();
+
+        return redirect('/post');
+    }
+
+    public function delete($id)
+    {
+        $post = Post::find($id);
+        $post->delete();
+
+        return redirect('/post');
+    }
 }

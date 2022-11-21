@@ -11,10 +11,11 @@
         <div>
             <a></a>
         </div>
-        <form method="POST" action="{{ url('/post') }}">
+        <form method="POST" action="{{ url('/post/' . $post->id) }}">
+            @method('PATCH')
             @csrf
-            <input type="text" id="subject" name="subject">
-            <input type="text" id="content" name="content">
+            <input type="text" id="subject" name="subject" value="{{ $post->subject }}">
+            <input type="text" id="content" name="content" value="{{ $post->content }}">
             <button type="submit">Submit</button>
         </form>
     </body>

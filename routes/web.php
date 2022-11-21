@@ -26,5 +26,7 @@ Route::prefix('/post')->group(function() {
        Route::get('/{id}/edit', 'edit');
 
        Route::post('/', 'store');
+       Route::patch('/{id}', 'update');
+       Route::delete('/{id}', 'delete');
    });
 });
