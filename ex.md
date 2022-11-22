@@ -18,9 +18,13 @@ Ajouter les différents liens des routes que nous avions créées auparavant dan
 
 # Exercice 4
 
-Créer un CRUD utilisateurs
+Transformer les page post pour qu'elles utilisent les layout du starter kit
 
 # Exercice 5
+
+Créer un CRUD utilisateurs
+
+# Exercice 6
 
 S'assurer qu'on peut affecter des rôles aux utilisateurs
 Bloquer les pages du CRUD utilisateurs pour tous sauf les utilisateurs ayant le rôle ADMIN
