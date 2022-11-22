@@ -22,3 +22,5 @@ Créer un CRUD utilisateurs
 
 # Exercice 5
 
+S'assurer qu'on peut affecter des rôles aux utilisateurs
+Bloquer les pages du CRUD utilisateurs pour tous sauf les utilisateurs ayant le rôle ADMIN
