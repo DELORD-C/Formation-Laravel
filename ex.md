@@ -19,6 +19,7 @@ Ajouter les différents liens des routes que nous avions créées auparavant dan
 # Exercice 4
 
 Transformer les page post pour qu'elles utilisent les layout du starter kit
+Ajouter les classes tailwind sur les formulaires pour améliorer l'affichage de ceux-ci
 
 # Exercice 5
 

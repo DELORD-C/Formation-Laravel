@@ -1,35 +1,45 @@
-@extends('app')
-
-@section('title')Create Post @endsection
-
-@section('content')
-    <div>
-        <h1>Post Create</h1>
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Edit Post') }}
+        </h2>
+    </x-slot>
+    <div class="flex-auto">
+        <form method="POST" action="{{ url('/post/' . $post->id) }}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mx-auto mb-4 mt-4 sm:max-w-md">
+            @method('PATCH')
+            @csrf
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="subject">
+                    Subject
+                </label>
+                <input value="{{ $post->subject }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text" placeholder="Subject">
+            </div>
+            <div class="mb-6">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="content">
+                    Content
+                </label>
+                <input value="{{ $post->content }}" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="content" type="text" placeholder="Content">
+            </div>
+            <div class="flex items-center justify-between">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Edit
+                </button>
+                <x-back>
+                    <x-slot name="text">
+                        Back
+                    </x-slot>
+                </x-back>
+            </div>
+        </form>
     </div>
-    <div>
-        <a class="btn btn-info" href="{{ url('/post') }}">Back</a>
-    </div>
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <form method="POST" action="{{ url('/post/' . $post->id) }}">
-        @method('PATCH')
-        @csrf
-        <div class="form-group mb-3">
-            <label for="subject">Subject :</label>
-            <input type="text" id="subject" name="subject" value="{{ $post->subject }}">
-        </div>
-        <div class="form-group mb-3">
-            <label for="content">Content :</label>
-            <input type="text" id="content" name="content" value="{{ $post->content }}">
-        </div>
-        <button class="btn btn-primary" type="submit">Submit</button>
+</x-app-layout>
 
-    </form>
-@endsection
