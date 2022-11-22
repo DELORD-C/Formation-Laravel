@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 class DefaultController extends Controller
 {
     public function greeting() {
-        return 'Hello World';
+        return response('Hello World', 200)
+            ->header('Content-type', 'text/plain');
     }
 
     public function random($max = 100) {

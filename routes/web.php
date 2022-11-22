@@ -1,32 +1,33 @@
 <?php
 
-use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
-Route::view('/welcome', 'welcome');
 
-Route::redirect('/hello', '/greeting', 301);
-//Route::permanentRedirect('/bonjour', 'greeting');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::controller(DefaultController::class)->group(function() {
-    Route::match(['get', 'post'], '/greeting', 'greeting');
-    //Route::get('random/{max?}', [DefaultController::class, 'random'])->where(['max' => '[0-9]+']);
-    Route::get('random/{max?}', 'random')->whereNumber('max')->name('random');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('/post')->group(function() {
+        Route::controller(PostController::class)->group(function() {
+            Route::get('/', 'index');
+            Route::get('/create', 'create');
+            Route::get('/{id}', 'show');
+            Route::get('/{id}/edit', 'edit');
+
+            Route::post('/', 'store');
+            Route::patch('/{id}', 'update');
+            Route::delete('/{id}', 'delete');
+        });
+    });
 });
 
-Route::prefix('/post')->group(function() {
-   Route::controller(PostController::class)->group(function() {
-       Route::get('/', 'index');
-       Route::get('/create', 'create');
-       Route::get('/{id}', 'show');
-       Route::get('/{id}/edit', 'edit');
-
-       Route::post('/', 'store');
-       Route::patch('/{id}', 'update');
-       Route::delete('/{id}', 'delete');
-   });
-});
+require __DIR__.'/auth.php';
