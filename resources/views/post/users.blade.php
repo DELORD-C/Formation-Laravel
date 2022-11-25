@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Post List') }}
+            {{ __('User List') }}
         </h2>
     </x-slot>
     <div class="flex-auto">
@@ -10,18 +10,21 @@
             <table class="table-auto w-full mt-4 text-left">
                 <thead>
                     <tr>
-                        <th>Subject</th>
-                        <th>Content</th>
-                        <th>Author</th>
-                        <th>Actions</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Posts</th>
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($posts as $index => $post)
+                @foreach ($users as $index => $user)
                     <tr>
-                        <td>{{ $post->subject }}</td>
-                        <td>{{ $post->content }}</td>
-                        <td>{{ $post->user->email }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td>{{ $user->name }}</td>
+                        <td>
+                            @foreach($user->posts as $post)
+                                <span>{{ $post->id }}</span>
+                            @endforeach
+                        </td>
                         <td>
                             <form method="POST" action="{{ url('/post/' . $post->id) }}">
                                 <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" href="{{ url('/post/' . $post->id) }}">Show</a>

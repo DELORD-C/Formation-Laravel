@@ -34,14 +34,13 @@
                                     {{ __('List') }}
                                 </x-dropdown-link>
 
-                                <!-- Authentication -->
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
+                                <x-dropdown-link :href="url('/post/users')">
+                                    {{ __('Users') }}
+                                </x-dropdown-link>
 
-                                    <x-dropdown-link :href="url('/post/create')">
-                                        {{ __('Create') }}
-                                    </x-dropdown-link>
-                                </form>
+                                <x-dropdown-link :href="url('/post/create')">
+                                    {{ __('Create') }}
+                                </x-dropdown-link>
                             </x-slot>
                         </x-dropdown>
                     </div>
