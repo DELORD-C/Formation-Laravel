@@ -52,12 +52,6 @@ class UserController extends Controller
 
     public function create(array $data)
     {
-//        $user = new User([
-//           'name' => $data['name'],
-//           'email' => $data['email'],
-//           'password' => Hash::make($data['password'])
-//        ]);
-//        $user->save();
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
