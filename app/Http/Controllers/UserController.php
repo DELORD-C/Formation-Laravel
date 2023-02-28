@@ -25,10 +25,10 @@ class UserController extends Controller
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             return redirect()->intended('/')
-                ->with(['Success' => 'Successfully Signed In.']);
+                ->with('success', 'Successfully Signed In.');
         }
 
-        return redirect('login')->withErrors('Login details are not valid');
+        return redirect('login')->with('error', 'Login details are not valid');
     }
 
     public function register()
@@ -47,7 +47,7 @@ class UserController extends Controller
         $data = $request->all();
         $this->create($data);
 
-        return redirect('/')->with(['Success' => 'You have signed-in.']);
+        return redirect('/')->with('success', 'You have signed-in.');
     }
 
     public function create(array $data)

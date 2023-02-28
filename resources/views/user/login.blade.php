@@ -1,3 +1,5 @@
+<span>{{ session()->get('error') }}</span>
+
 <form method="post">
     @csrf
     @if ($errors->has('email'))

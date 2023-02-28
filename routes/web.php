@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,5 +43,6 @@ Route::view('/test', 'default', ['data' => 'Test View in Route']);
 //    // ...
 //});
 
-
 require __DIR__ . '/user.php';
+
+Route::resource('post', PostController::class);
