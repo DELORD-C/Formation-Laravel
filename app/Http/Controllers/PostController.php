@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
 {
@@ -11,10 +13,22 @@ class PostController extends Controller
      * Display a listing of the resource.
      *
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
+//        $uri = $request->path();
+//        echo $uri;
 
+//        $url = $request->url(); //url complète sans paramètres
+//        $urlWithParameters = $request->fullUrl(); //url complète avec paramètres
+//        $urlWithFilteredParameter = $request->fullUrlWithQuery(['type' => 'phone']);
+
+//        echo $request->schemeAndHttpHost();
+
+//        echo $request->method();
+
+//        dump($request->date('date'));
+
+        $posts = Post::all();
         return view('post.index',compact('posts'));
     }
 
@@ -36,10 +50,15 @@ class PostController extends Controller
     {
         $request->validate([
             'subject' => 'required',
-            'body' => 'required'
+            'body' => 'required',
         ]);
 
-        Post::create($request->all());
+        $post = new Post([
+            'subject' => $request->input('subject'),
+            'body' => $request->get('body'),
+            'user_id' => Auth()->user()->id
+        ]);
+        $post->save();
 
         return redirect()->route('post.index')
             ->with('success', 'Post created successfully.');
@@ -62,6 +81,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        Gate::authorize('own', $post);
         return view('post.edit', compact('post'));
     }
 
@@ -73,6 +93,7 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        Gate::authorize('own', $post);
         $request->validate([
             'subject' => 'required',
             'body' => 'required',
@@ -91,6 +112,7 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->authorize('own', $post);
         $post->delete();
         return redirect()->route('post.index')
             ->with('success', 'Post deleted successfully.');

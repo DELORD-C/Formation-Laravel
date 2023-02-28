@@ -12,6 +12,7 @@
                 <th>Id</th>
                 <th>Subject</th>
                 <th>Body</th>
+                <th>Author</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -21,14 +22,17 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->subject }}</td>
                 <td>{{ $post->body }}</td>
+                <td>{{ $post->user?->email }}</td>
                 <td>
                     <form action="{{ route('post.destroy', $post->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
 
                         <a class="btn btn-info" href="{{ route('post.show', $post->id) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        @can('own', $post)
+                            <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        @endcan
                     </form>
                 </td>
             </tr>

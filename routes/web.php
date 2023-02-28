@@ -45,4 +45,5 @@ Route::view('/test', 'default', ['data' => 'Test View in Route']);
 
 require __DIR__ . '/user.php';
 
-Route::resource('post', PostController::class);
+Route::resource('post', PostController::class)
+    ->middleware('auth');
