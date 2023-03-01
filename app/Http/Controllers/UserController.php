@@ -12,11 +12,13 @@ class UserController extends Controller
 {
     public function index()
     {
+        $this->authorize('notAuth');
         return view('user.login');
     }
 
     public function auth (Request $request)
     {
+        $this->authorize('notAuth');
         $request->validate([
             'email' => 'required',
             'password' => 'required',
@@ -33,11 +35,13 @@ class UserController extends Controller
 
     public function register()
     {
+        $this->authorize('notAuth');
         return view('user.register');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('notAuth');
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
@@ -50,7 +54,7 @@ class UserController extends Controller
         return redirect('/')->with('success', 'You have signed-in.');
     }
 
-    public function create(array $data)
+    private function create(array $data)
     {
         User::create([
             'name' => $data['name'],
@@ -65,5 +69,16 @@ class UserController extends Controller
         Auth::logout();
 
         return redirect('login');
+    }
+
+    public function privilege(User $user)
+    {
+        $this->authorize('privilege', [$user]);
+        if ($user->isAdmin()) {
+            $user->downgrade();
+        }
+        else {
+            $user->upgrade();
+        }
     }
 }

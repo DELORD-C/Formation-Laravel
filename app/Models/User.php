@@ -54,4 +54,14 @@ class User extends Authenticatable
     public function isAdmin() {
         return $this->roles()->where('name', 'Admin')->exists();
     }
+
+    public function upgrade() {
+        $id = Role::all()->where('name', 'Admin')->first()->id;
+        $this->roles()->attach($id);
+    }
+
+    public function downgrade() {
+        $id = Role::all()->where('name', 'Admin')->first()->id;
+        $this->roles()->detach($id);
+    }
 }
