@@ -11,13 +11,6 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can update the model.
-     *
-     * @param  \App\Models\User  $user
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Auth\Access\Response|bool
-     */
     public function own(User $user, Post $post)
     {
         return $user->id === $post->user_id

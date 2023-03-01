@@ -1,4 +1,11 @@
 <?php return array (
+  'blade-ui-kit/blade-icons' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'BladeUI\\Icons\\BladeIconsServiceProvider',
+    ),
+  ),
   'fruitcake/laravel-cors' => 
   array (
     'providers' => 
@@ -64,6 +71,13 @@
     'providers' => 
     array (
       0 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    ),
+  ),
+  'outhebox/blade-flags' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'OutheBox\\BladeFlags\\BladeFlagsServiceProvider',
     ),
   ),
   'spatie/laravel-ignition' => 

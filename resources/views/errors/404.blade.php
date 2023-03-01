@@ -5,5 +5,5 @@
 @endsection
 
 @section('content')
-    <a class="btn btn-primary" href="{{ back() }}">Back</a>
+    <a class="btn btn-primary" href="{{ url()->previous() }}">Back</a>
 @endsection

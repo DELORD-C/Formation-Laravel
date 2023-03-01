@@ -1,7 +1,5 @@
 {
-    "The :attribute must contain at least one letter.": "The :attribute must contain at least one letter.",
-    "The :attribute must contain at least one number.": "The :attribute must contain at least one number.",
-    "The :attribute must contain at least one symbol.": "The :attribute must contain at least one symbol.",
-    "The :attribute must contain at least one uppercase and one lowercase letter.": "The :attribute must contain at least one uppercase and one lowercase letter.",
-    "The given :attribute has appeared in a data leak. Please choose a different :attribute.": "The given :attribute has appeared in a data leak. Please choose a different :attribute."
+    "Posts": "Posts",
+    "welcome": "Welcome :email",
+    "Post List": "{0} No Post|{1} The Lonely Post|[2,*] Post List"
 }

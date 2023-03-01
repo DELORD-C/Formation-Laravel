@@ -13,10 +13,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('post.index') }}">Posts</a>
+                    <a class="nav-link" href="{{ route('post.index') }}">{{ __('Posts') }}</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-0 mb-2 mb-lg-0">
+                <li class="nav-item d-flex justify-center">
+                    <p class="m-0 d-flex justify-center">{{ __('welcome', ['email' => auth()?->user()?->email]) }}</p>
+                </li>
             @auth
                 <li class="nav-item">
                     <a href="{{ url('/logout') }}" class="nav-link">Logout</a>
@@ -32,6 +35,9 @@
                     </li>
                 @endif
             @endauth
+                <li class="d-flex justify-center ml-4">
+                    <a class="d-flex justify-center" href="{{ route('locale.switcher', app()->getLocale() == 'en' ? 'fr' : 'en') }}"><x-dynamic-component component="flag-language-{{ app()->getLocale() }}" style="width: 20px"/></a>
+                </li>
             </ul>
         </div>
     </div>

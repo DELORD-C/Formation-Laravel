@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 
 @section('title')
-    Post List
+{{ trans_choice('Post List', count($posts)) }}
 @endsection
 
 @section('content')

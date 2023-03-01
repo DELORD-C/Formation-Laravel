@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -54,6 +55,15 @@ Route::get('/switch/{locale}', function ($locale) {
     if (!in_array($locale, ['en', 'fr'])) {
         return redirect()->back()->with('error', 'Unsupported locale.');
     }
+    session()->put('_locale', $locale);
+    return redirect()->back();
+})->name('locale.switcher');
 
-    App::setLocale($locale);
-});
+Route::controller(CommentController::class)
+    ->prefix('comment')
+    ->group(function() {
+        Route::get('/edit/{comment}', 'edit')->name('comment.edit');
+        Route::put('/update/{comment}', 'update')->name('comment.update');
+        Route::post('/store/{post}', 'store')->name('comment.store');
+        Route::delete('/destroy/{comment}', 'destroy')->name('comment.destroy');
+    })->middleware('auth');
