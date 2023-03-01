@@ -1,4 +1,4 @@
-@extends('post.layout')
+@extends('layouts.layout')
 
 @section('title')
     Post List
@@ -21,10 +21,10 @@
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->subject }}</td>
-                <td>{{ $post->body }}</td>
+                <td class="text-truncate" style="max-width: 300px">{{ $post->body }}</td>
                 <td>{{ $post->user?->email }}</td>
                 <td>
-                    <form action="{{ route('post.destroy', $post->id) }}" method="POST">
+                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="d-flex">
                         @csrf
                         @method('DELETE')
 

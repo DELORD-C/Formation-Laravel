@@ -1,4 +1,4 @@
-@extends('post.layout')
+@extends('layouts.layout')
 
 @section('title')
     Show Post n°{{ $post->id }}

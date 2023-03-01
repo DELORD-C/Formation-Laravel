@@ -1,14 +1,28 @@
-<span>{{ session()->get('error') }}</span>
+@extends('layouts.layout')
 
-<form method="post">
+@section('title')
+    Login
+@endsection
+
+@section('content')
+    <form method="POST" action="{{ route('login') }}">
     @csrf
-    @if ($errors->has('email'))
-        <span>{{$errors->first('email')}}</span>
-    @endif
-    <input type="email" placeholder="Email" name="email" required>
-    @if ($errors->has('password'))
-        <span>{{$errors->first('password')}}</span>
-    @endif
-    <input type="password" placeholder="Password" name="password" required>
-    <input type="submit" value="Log In">
-</form>
+    <!-- Email input -->
+        <div class="form-outline mb-4">
+            <input type="email" name="email" id="email" class="form-control" placeholder="Email address"/>
+        </div>
+
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+        <!-- Register buttons -->
+        <div class="text-center">
+            <p>Not a member? <a href="{{ route('register') }}">Register</a></p>
+        </div>
+    </form>
+@endsection

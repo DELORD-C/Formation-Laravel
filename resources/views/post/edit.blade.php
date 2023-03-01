@@ -1,4 +1,4 @@
-@extends('post.layout')
+@extends('layouts.layout')
 
 @section('title')
     Edit Post n°{{ $post->id }}
