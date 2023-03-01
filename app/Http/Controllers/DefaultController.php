@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
+
 class DefaultController extends Controller
 {
 //    public function __construct()
@@ -29,5 +31,15 @@ class DefaultController extends Controller
         return view('default', [
             'data' => '<h1>On voit le code HTML !</h1>'
         ]);
+    }
+
+    public function query()
+    {
+        $users = DB::table('users')
+            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+            ->select('users.email', 'roles.name')
+            ->get();
+        dump($users);
     }
 }

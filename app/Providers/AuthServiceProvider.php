@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Policies\AuthPolicy;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -37,7 +38,10 @@ class AuthServiceProvider extends ServiceProvider
 //        });
 
         Gate::define('notAuth', function (?User $user) {
-            return empty($user);
+            if (empty($user)) {
+                return Response::allow();
+            }
+            return Response::denyAsNotFound();
         });
 
         Gate::before(function ($user, $ability) {

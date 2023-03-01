@@ -3,6 +3,7 @@
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,6 +28,7 @@ Route::controller(DefaultController::class)
         Route::get('/random/{max?}', 'random')
             ->whereNumber('max');
         Route::get('/greetings', 'greetings');
+        Route::get('/query', 'query');
         Route::match(['get', 'post'], '/code', 'code');
 });
 
@@ -47,3 +49,11 @@ require __DIR__ . '/user.php';
 
 Route::resource('post', PostController::class)
     ->middleware('auth');
+
+Route::get('/switch/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'fr'])) {
+        return redirect()->back()->with('error', 'Unsupported locale.');
+    }
+
+    App::setLocale($locale);
+});
