@@ -20,7 +20,8 @@ class CommentPolicy
 
     public function delete(User $user, Comment $comment)
     {
-        return $user->id === $comment->user_id || $user->id === $comment->post->user_id
+        return $user->id === $comment->user_id
+            || $user->id === $comment->post->user_id
             ? Response::allow()
             : Response::deny('You can only delete your own comments or the ones on your posts.');
     }
