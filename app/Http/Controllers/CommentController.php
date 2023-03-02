@@ -29,7 +29,7 @@ class CommentController extends Controller
         ]);
         $comment->save();
 
-        return redirect()->back()
+        return redirect()->route('post.show', $post->id)
             ->with('success', 'Comment successfully created.');
     }
 
@@ -60,7 +60,7 @@ class CommentController extends Controller
 
         $comment->update($request->all());
 
-        return redirect()->route('post.show', ['post' => $comment->post->id])
+        return redirect()->route('post.show', $comment->post->id)
             ->with('success', 'Comment updated successfully.');
     }
 
@@ -75,7 +75,7 @@ class CommentController extends Controller
         $this->authorize('delete', $comment);
 //        $post = $comment->post;
         $comment->delete();
-        return redirect()->route('post.show', ['post' => $comment->post->id])
+        return redirect()->route('post.show', $comment->post->id)
             ->with('success', 'Comment deleted successfully.');
     }
 }
