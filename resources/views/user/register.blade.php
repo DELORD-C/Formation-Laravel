@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('store') }}">
     @csrf
         <!-- Name input -->
         <div class="form-outline mb-4">
@@ -20,6 +20,10 @@
         <!-- Password input -->
         <div class="form-outline mb-4">
             <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+        </div>
+
+        <div class="form-outline mb-4">
+            <input type="email" name="referer" id="referer" class="form-control" placeholder="Referrer's email"/>
         </div>
 
         <!-- Submit button -->

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -43,6 +44,8 @@ class DefaultController extends Controller
             ->select('users.email', 'roles.name')
             ->get();
         dump($users);
+
+        dump(Auth::user()->referer);
     }
 
     public function mail()

@@ -56,10 +56,18 @@ class UserController extends Controller
 
     private function create(array $data)
     {
+
+        if (User::where('email', '=', $data['referer'])->exists()) {
+            $data['referer'] = User::where('email', '=', $data['referer'])->first()->id;
+        }
+        else {
+            $data['referer'] = null;
+        }
         User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'referer' => $data['referer']
         ]);
     }
 
