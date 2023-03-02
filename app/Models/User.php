@@ -69,4 +69,12 @@ class User extends Authenticatable
         $id = Role::all()->where('name', 'Admin')->first()->id;
         $this->roles()->detach($id);
     }
+
+    public function likes() {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLiked(Comment $comment) {
+        return $this->likes()->where('comment_id', '=', $comment->id)->exists();
+    }
 }

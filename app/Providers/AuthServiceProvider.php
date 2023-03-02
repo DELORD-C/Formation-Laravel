@@ -3,10 +3,12 @@
 namespace App\Providers;
 
 use App\Models\Comment;
+use App\Models\Like;
 use App\Models\Post;
 use App\Models\User;
 use App\Policies\AuthPolicy;
 use App\Policies\CommentPolicy;
+use App\Policies\LikePolicy;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Access\Response;
@@ -21,7 +23,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         Post::class => PostPolicy::class,
         User::class => UserPolicy::class,
         Comment::class => CommentPolicy::class
@@ -48,7 +49,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::before(function ($user, $ability) {
-            if ($user->isAdmin() and !in_array($ability, ['notAuth', 'privilege'])) {
+            if ($user->isAdmin() and !in_array($ability, ['notAuth', 'privilege', 'like'])) {
                 return true;
             }
         });

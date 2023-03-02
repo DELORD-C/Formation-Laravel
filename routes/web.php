@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\App;
@@ -30,6 +31,7 @@ Route::controller(DefaultController::class)
             ->whereNumber('max');
         Route::get('/greetings', 'greetings');
         Route::get('/query', 'query');
+        Route::get('/mail', 'mail')->name('mail');
         Route::match(['get', 'post'], '/code', 'code');
 });
 
@@ -66,4 +68,11 @@ Route::controller(CommentController::class)
         Route::put('/update/{comment}', 'update')->name('comment.update');
         Route::post('/store/{post}', 'store')->name('comment.store');
         Route::delete('/destroy/{comment}', 'destroy')->name('comment.destroy');
-    })->middleware('auth');
+})->middleware('auth');
+
+Route::controller(LikeController::class)
+    ->prefix('like')
+    ->group(function() {
+        Route::get('/store/{comment}', 'store')->name('like.store');
+        Route::get('/destroy/{like}', 'destroy')->name('like.destroy');
+})->middleware('auth');

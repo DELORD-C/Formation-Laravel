@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 
 class PostController extends Controller
@@ -27,8 +29,16 @@ class PostController extends Controller
 
 //        dump($request->date('date'));
 
-        $posts = Post::all();
-        return view('post.index',compact('posts'));
+        if (Cache::has('post_list')) {
+            $posts = Cache::get('post_list');
+        }
+        else {
+            $posts = Post::all();
+            Cache::add('post_list', $posts);
+        }
+
+        $view = view('post.index',compact('posts'))->render();
+        return response($view);
     }
 
     /**
@@ -58,6 +68,7 @@ class PostController extends Controller
             'user_id' => Auth()->user()->id
         ]);
         $post->save();
+        Cache::delete('post_list');
 
         return redirect()->route('post.index')
             ->with('success', 'Post created successfully.');
@@ -99,6 +110,7 @@ class PostController extends Controller
         ]);
 
         $post->update($request->all());
+        Cache::delete('post_list');
 
         return redirect()->route('post.index')
             ->with('success', 'Post updated successfully.');
@@ -113,6 +125,8 @@ class PostController extends Controller
     {
         $this->authorize('own', $post);
         $post->delete();
+        Cache::delete('post_list');
+
         return redirect()->route('post.index')
             ->with('success', 'Post deleted successfully.');
     }

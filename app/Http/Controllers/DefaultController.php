@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TestMail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class DefaultController extends Controller
 {
@@ -41,5 +43,11 @@ class DefaultController extends Controller
             ->select('users.email', 'roles.name')
             ->get();
         dump($users);
+    }
+
+    public function mail()
+    {
+        Mail::to('dawantestlaravel@gmail.com')
+        ->send(new TestMail());
     }
 }

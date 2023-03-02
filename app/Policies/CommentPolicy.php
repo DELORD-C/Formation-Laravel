@@ -25,4 +25,9 @@ class CommentPolicy
             ? Response::allow()
             : Response::deny('You can only delete your own comments or the ones on your posts.');
     }
+
+    public function like (User $user, Comment $comment)
+    {
+        return $user != $comment->user;
+    }
 }

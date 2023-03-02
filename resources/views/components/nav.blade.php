@@ -15,13 +15,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('post.index') }}">{{ __('Posts') }}</a>
                 </li>
+                @auth()
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('privilege', auth()->user()->id) }}">{{ __('Grant') }}</a>
+                </li>
+                @endauth
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('mail') }}">{{ __('Mail') }}</a>
                 </li>
             </ul>
             <ul class="navbar-nav mr-0 mb-2 mb-lg-0">
                 <li class="nav-item d-flex justify-center">
-                    <p class="m-0 d-flex justify-center">{{ __('welcome', ['email' => auth()?->user()?->email]) }}</p>
+                    <p class="m-0 d-flex justify-center align-items-center">{{ __('welcome', ['email' => auth()?->user()?->email]) }}</p>
                 </li>
             @auth
                 <li class="nav-item">
