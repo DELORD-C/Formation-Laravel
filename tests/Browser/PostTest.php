@@ -35,6 +35,12 @@ class PostTest extends DuskTestCase
         // Visit route post.index
         // Click on Privilege link ('Grant')
         // Assert Second post has not a delete btn
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                ->visitRoute('post.index')
+                ->clickLink('Grant')
+                ->assertDontSeeIn('table tr:nth-child(2) form', 'Delete');
+        });
     }
 
     public function test_nav_admin_can_delete_posts(): void
@@ -44,5 +50,11 @@ class PostTest extends DuskTestCase
         // Visit route post.index
         // Click on Privilege link ('Grant')
         // Assert Second post has a delete btn
+        $this->browse(function (Browser $browser) {
+            $browser->loginAs(User::find(1))
+                ->visitRoute('post.index')
+                ->clickLink('Grant')
+                ->assertSeeIn('table tr:nth-child(2) form', 'Delete');
+        });
     }
 }
