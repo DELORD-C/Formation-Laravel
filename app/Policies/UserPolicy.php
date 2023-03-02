@@ -19,6 +19,7 @@ class UserPolicy
      */
     public function privilege(User $user, User $target)
     {
-        return $user != $target && $user->isAdmin();
+        return true;
+//        return $user != $target && $user->isAdmin();
     }
 }

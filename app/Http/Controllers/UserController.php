@@ -80,5 +80,6 @@ class UserController extends Controller
         else {
             $user->upgrade();
         }
+        return redirect()->back();
     }
 }

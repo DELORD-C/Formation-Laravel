@@ -15,6 +15,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('post.index') }}">{{ __('Posts') }}</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('privilege', auth()->user()->id) }}">{{ __('Grant') }}</a>
+                </li>
             </ul>
             <ul class="navbar-nav mr-0 mb-2 mb-lg-0">
                 <li class="nav-item d-flex justify-center">

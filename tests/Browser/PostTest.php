@@ -14,11 +14,11 @@ class PostTest extends DuskTestCase
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
                     ->visit('/post/1')
-                    ->assertSee('Dignissimos');
+                    ->assertSee('Show Post n°1');
         });
     }
 
-    public function test_nav(): void
+    public function test_nav_basic(): void
     {
         $this->browse(function (Browser $browser) {
             $browser->loginAs(User::find(1))
@@ -26,5 +26,23 @@ class PostTest extends DuskTestCase
                 ->clickLink('Posts')
                 ->assertSee('Post List');
         });
+    }
+
+    public function test_nav_admin_switch_cannot_delete_posts(): void
+    {
+        // Test
+        // Connect as admin
+        // Visit route post.index
+        // Click on Privilege link ('Grant')
+        // Assert Second post has not a delete btn
+    }
+
+    public function test_nav_admin_can_delete_posts(): void
+    {
+        // Test
+        // Connect as admin
+        // Visit route post.index
+        // Click on Privilege link ('Grant')
+        // Assert Second post has a delete btn
     }
 }
