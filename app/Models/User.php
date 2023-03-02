@@ -60,6 +60,10 @@ class User extends Authenticatable
         return $this->roles()->where('name', 'Admin')->exists();
     }
 
+    public function isModerator() {
+        return $this->roles()->where('name', 'Moderator')->exists();
+    }
+
     public function upgrade() {
         $id = Role::all()->where('name', 'Admin')->first()->id;
         $this->roles()->attach($id);

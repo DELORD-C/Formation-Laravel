@@ -13,7 +13,7 @@ class CommentPolicy
 
     public function edit(User $user, Comment $comment)
     {
-        return $user->id === $comment->user_id
+        return $user->id === $comment->user_id || $user->isModerator()
             ? Response::allow()
             : Response::deny('You can only edit your own comments.');
     }
@@ -22,6 +22,7 @@ class CommentPolicy
     {
         return $user->id === $comment->user_id
             || $user->id === $comment->post->user_id
+            || $user->isModerator()
             ? Response::allow()
             : Response::deny('You can only delete your own comments or the ones on your posts.');
     }
