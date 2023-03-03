@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
 use App\Models\User;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class DefaultController extends Controller
 {
@@ -39,16 +41,27 @@ class DefaultController extends Controller
 
     public function query()
     {
-        $users = DB::table('users')
-            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
-            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
-            ->select('users.email', 'roles.name')
-            ->get();
-        dump($users);
+//        $users = DB::table('users')
+//            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
+//            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
+//            ->select('users.email', 'roles.name')
+//            ->get();
+//        dump($users);
+//
+//        $user = User::find(2);
+//        dump($user);
+//        $user->delete();
 
-        $user = User::find(2);
-        dump($user);
-        $user->delete();
+//        Storage::put('file.txt', 'Test');
+//        $file = Storage::get('file.txt');
+//        dump($file);
+
+//        $dompdf = new Dompdf();
+//        $dompdf->loadHtml(view('mails.test')->render());
+//        $dompdf->render();
+//        $dompdf->stream();
+
+
     }
 
     public function mail()

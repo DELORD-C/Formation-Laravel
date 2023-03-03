@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\LikeSubmitted;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Http\Request;
@@ -17,17 +18,17 @@ class LikeController extends Controller
             'comment_id' => $comment->id
         ]);
         $like->save();
+        LikeSubmitted::dispatch($comment);
 
-        return redirect()->route('post.show', $comment->post->id)
-            ->with('success', 'Comment successfully liked.');
+        return $comment->refresh()->likes()->count();
     }
 
-    public function destroy(Like $like)
+    public function destroy(Comment $comment)
     {
-        $this->authorize('like', $like->comment);
-
+        $this->authorize('like', $comment);
+        $like = $comment->getLikeByUser();
         $like->delete();
-        return redirect()->route('post.show', $like->comment->post->id)
-            ->with('success', 'Comment successfully unliked.');
+
+        return $comment->refresh()->likes()->count();
     }
 }

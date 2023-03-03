@@ -39,9 +39,9 @@
                         @endcan
                         @can('like', $comment)
                             @if(auth()->user()->hasLiked($comment))
-                                <a href="{{ route('like.destroy', $comment->getLikeByUser()) }}"><i class="bi bi-heart-fill"></i></a>
+                                <button type="button" class="like-btn" method="unlike" comment="{{ $comment->id }}"><i class="bi bi-heart-fill"></i></button>
                             @else
-                                <a href="{{ route('like.store', $comment->id) }}"><i class="bi bi-heart"></i></a>
+                                <button type="button" class="like-btn" method="like" comment={{ $comment->id }}><i class="bi bi-heart"></i></button>
                             @endif
                         @endcan
                     </form>

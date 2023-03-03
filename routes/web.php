@@ -74,5 +74,5 @@ Route::controller(LikeController::class)
     ->prefix('like')
     ->group(function() {
         Route::get('/store/{comment}', 'store')->name('like.store');
-        Route::get('/destroy/{like}', 'destroy')->name('like.destroy');
+        Route::get('/destroy/{comment}', 'destroy')->name('like.destroy');
 })->middleware('auth');
