@@ -5,7 +5,10 @@ use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
+use App\Models\User;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -76,3 +79,8 @@ Route::controller(LikeController::class)
         Route::get('/store/{comment}', 'store')->name('like.store');
         Route::get('/destroy/{comment}', 'destroy')->name('like.destroy');
 })->middleware('auth');
+
+
+Route::get('/search/{query}', function (String $query) {
+    return User::search('admin')->get();
+});

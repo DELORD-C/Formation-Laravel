@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\TestMail;
+use App\Models\Post;
 use App\Models\User;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Auth;
@@ -60,8 +61,6 @@ class DefaultController extends Controller
 //        $dompdf->loadHtml(view('mails.test')->render());
 //        $dompdf->render();
 //        $dompdf->stream();
-
-
     }
 
     public function mail()
