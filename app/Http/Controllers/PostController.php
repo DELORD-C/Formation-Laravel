@@ -29,13 +29,13 @@ class PostController extends Controller
 
 //        dump($request->date('date'));
 
-        if (Cache::has('post_list')) {
-            $posts = Cache::get('post_list');
-        }
-        else {
-            $posts = Post::all();
-            Cache::add('post_list', $posts);
-        }
+//        if (Cache::has('post_list')) {
+//            $posts = Cache::get('post_list');
+//        }
+//        else {
+            $posts = Post::paginate(5);
+//            Cache::add('post_list', $posts);
+//        }
 
         $view = view('post.index',compact('posts'))->render();
         return response($view);
