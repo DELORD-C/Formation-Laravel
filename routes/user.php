@@ -9,5 +9,6 @@ Route::controller(UserController::class)->group(function() {
     Route::get('/register', 'register')->name('register');
     Route::post('/register', 'store')->name('store');
     Route::get('/logout', 'logout')->name('logout');
+    Route::get('/reset', 'resetPassword')->name('password.reset');
     Route::any('/privilege/{user}', 'privilege')->name('privilege');
 });

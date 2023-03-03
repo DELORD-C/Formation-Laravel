@@ -12,6 +12,7 @@ use App\Policies\LikePolicy;
 use App\Policies\PostPolicy;
 use App\Policies\UserPolicy;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -53,5 +54,9 @@ class AuthServiceProvider extends ServiceProvider
                 return true;
             }
         });
+
+//        ResetPassword::createUrlUsing(function ($user, string $token) {
+//            return 'https://monserveur.com/reset-password?token='.$token;
+//        });
     }
 }

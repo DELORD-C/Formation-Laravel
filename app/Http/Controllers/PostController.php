@@ -33,7 +33,7 @@ class PostController extends Controller
 //            $posts = Cache::get('post_list');
 //        }
 //        else {
-            $posts = Post::paginate(5);
+            $posts = Post::paginate(22);
 //            Cache::add('post_list', $posts);
 //        }
 
@@ -79,8 +79,16 @@ class PostController extends Controller
      *
      * @param Post $post
      */
-    public function show(Post $post)
+    public function show(Int $postId)
     {
+        if (!Cache::has('post_' . $postId)) {
+            $post = Post::find($postId);
+            Cache::put('post_' . $postId, $post);
+        }
+        else {
+            $post = Cache::get('post_' . $postId);
+        }
+
         return view('post.show',compact('post'));
     }
 
@@ -110,7 +118,7 @@ class PostController extends Controller
         ]);
 
         $post->update($request->all());
-        Cache::delete('post_list');
+        Cache::delete('post_' . $post->id);
 
         return redirect()->route('post.index')
             ->with('success', 'Post updated successfully.');
@@ -125,7 +133,7 @@ class PostController extends Controller
     {
         $this->authorize('own', $post);
         $post->delete();
-        Cache::delete('post_list');
+        Cache::delete('post_' . $post->id);
 
         return redirect()->route('post.index')
             ->with('success', 'Post deleted successfully.');

@@ -21,7 +21,7 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         LikeSubmitted::class => [
-            SendLikeNotification::class,
+//            SendLikeNotification::class,
         ]
     ];
 

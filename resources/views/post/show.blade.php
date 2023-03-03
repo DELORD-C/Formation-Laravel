@@ -25,7 +25,7 @@
                 <td>{{ $comment->body }}</td>
                 <td>{{ $comment->user->name }}</td>
                 <td>{{ $comment->updated_at }}</td>
-                <td>{{ $comment->likes->count() }}</td>
+                <td>{{ $comment->likes->count() * 5 }}</td>
                 <td>
                     <form action="{{ route('comment.destroy', $comment->id) }}" method="post">
                         @csrf

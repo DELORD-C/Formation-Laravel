@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -93,4 +94,11 @@ class User extends Authenticatable
     public function hasLiked(Comment $comment) {
         return $this->likes()->where('comment_id', '=', $comment->id)->exists();
     }
+
+//    public function sendPasswordResetNotification($token)
+//    {
+//        $url = '';
+//
+//        $this->notify(new ResetPassword($url));
+//    }
 }

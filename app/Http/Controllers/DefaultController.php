@@ -42,12 +42,11 @@ class DefaultController extends Controller
 
     public function query()
     {
-//        $users = DB::table('users')
-//            ->join('user_roles', 'users.id', '=', 'user_roles.user_id')
-//            ->join('roles', 'user_roles.role_id', '=', 'roles.id')
-//            ->select('users.email', 'roles.name')
+//        $users = DB::table('posts')
+//            ->join('users', 'users.id', '=', 'posts.user_id')
+//            ->select('posts.*', 'users.*')
 //            ->get();
-//        dump($users);
+//        return $users;
 //
 //        $user = User::find(2);
 //        dump($user);
@@ -61,6 +60,8 @@ class DefaultController extends Controller
 //        $dompdf->loadHtml(view('mails.test')->render());
 //        $dompdf->render();
 //        $dompdf->stream();
+
+
     }
 
     public function mail()

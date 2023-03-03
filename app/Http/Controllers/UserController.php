@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
@@ -82,12 +83,18 @@ class UserController extends Controller
     public function privilege(User $user)
     {
         $this->authorize('privilege', [$user]);
-        if ($user->isAdmin()) {
-            $user->downgrade();
-        }
-        else {
+        if (!$user->isAdmin()) {
             $user->upgrade();
         }
         return redirect()->back();
+    }
+
+    public function resetPassword (Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::sendResetLink($request->only('email'));
+
+        dump(__($status));
     }
 }

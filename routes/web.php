@@ -82,5 +82,5 @@ Route::controller(LikeController::class)
 
 
 Route::get('/search/{query}', function (String $query) {
-    return User::search('admin')->get();
+    return view('post.index', ['posts' => Post::search($query)->paginate(5)]);
 });

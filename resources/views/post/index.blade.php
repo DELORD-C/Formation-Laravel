@@ -9,7 +9,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
+                <th>{{ __('Id') }}</th>
                 <th>Subject</th>
                 <th>Body</th>
                 <th>Author</th>
@@ -22,7 +22,7 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->subject }}</td>
                 <td class="text-truncate" style="max-width: 300px">{{ $post->body }}</td>
-                <td>{{ $post->user?->email }}</td>
+                <td>{{ ucfirst($post->user?->name) }}</td>
                 <td>
                     <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="d-flex">
                         @csrf

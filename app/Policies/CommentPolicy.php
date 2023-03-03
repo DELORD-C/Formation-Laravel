@@ -29,6 +29,6 @@ class CommentPolicy
 
     public function like (User $user, Comment $comment)
     {
-        return $user != $comment->user;
+        return true;
     }
 }

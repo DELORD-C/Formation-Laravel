@@ -5442,7 +5442,7 @@ try {
           likeBtn.setAttribute('method', method === 'like' ? 'unlike' : 'like');
           likeBtn.firstElementChild.classList.toggle('bi-heart');
           likeBtn.firstElementChild.classList.toggle('bi-heart-fill');
-          likeBtn.parentElement.parentElement.previousElementSibling.innerHTML = this.responseText;
+          likeBtn.parentElement.parentElement.previousElementSibling.innerHTML = parseInt(this.responseText) * 5;
         }
       };
       request.open("GET", "/like/" + (method === "like" ? "store/" : "destroy/") + likeBtn.getAttribute("comment"));

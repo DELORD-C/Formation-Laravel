@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
     <body>
-        {!! $data !!}
+        {{ $data }}
     </body>
 </html>
