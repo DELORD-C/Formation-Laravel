@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -14,8 +15,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('referer_id')->nullable();
-            $table->foreign('referer_id')->references('id')->on('users');
+            $table->bigInteger('referer_id')->nullable()->unsigned();
+            $table->foreign('referer_id')->references('id')->on('users')->nullOnDelete();
         });
     }
 
