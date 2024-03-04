@@ -1,4 +1,7 @@
 <html lang="en">
+    <head>
+        @vite('resources/css/app.css')
+    </head>
     <body>
         @if ($message = Session::get('notif'))
             <p>{{ $message }}</p>
@@ -26,6 +29,7 @@
                 </tr>
             @endforeach
         </table>
+        {!! $posts->links() !!}
     <a href="{{ route('post.create') }}">Create</a>
     </body>
 </html>

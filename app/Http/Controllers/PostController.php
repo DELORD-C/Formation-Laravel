@@ -30,13 +30,13 @@ class PostController extends Controller
         return redirect(route('post.list'));
     }
 
-    public function list (): View
+    public function list (Request $request): View
     {
-        $posts = Post::all();
+        $posts = Post::paginate(5);
 
         return view('posts.list', [
             'posts' => $posts
-        ]);
+        ])->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function edit (Post $post): View
