@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::controller(PostController::class)
         Route::post('/update/{post}', 'update')->name('update');
         Route::get('/delete/{post}', 'delete')->name('delete');
     });
+
+Route::resource('review', ReviewController::class);
 
 //Route::get('/random/1000', function () {
 //   return rand(0, 1000);

@@ -53,7 +53,7 @@ class PostController extends Controller
 
         $post->update($request->all());
 
-        return redirect(route('post.list'));
+        return redirect(route('post.list'))->with('notif', 'Post successfully updated');
     }
 
     public function delete(Post $post): RedirectResponse

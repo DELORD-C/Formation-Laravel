@@ -1,5 +1,8 @@
 <html lang="en">
     <body>
+        @if ($message = Session::get('notif'))
+            <p>{{ $message }}</p>
+        @endif
         <table>
             <tr>
                 <th>Id</th>
