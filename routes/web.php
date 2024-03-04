@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DefaultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(DefaultController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/random/{min?}/{max?}', 'random')->whereNumber(['min', 'max']);
 });
+
+//Route::get('/random/1000', function () {
+//   return rand(0, 1000);
+//});
