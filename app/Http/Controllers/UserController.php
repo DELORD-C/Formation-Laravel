@@ -6,14 +6,18 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
-        $this->authorize('notAuth');
+        // Utiliser une condition avec Gate::denies permet d'agir différemment
+        if (Gate::denies('notAuth')) {
+            return redirect('/')->with("error", "You are already logged in !");
+        }
         return view('users.login');
     }
 

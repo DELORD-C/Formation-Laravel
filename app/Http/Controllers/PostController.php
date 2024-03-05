@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -22,6 +23,7 @@ class PostController extends Controller
         ]);
 
         $post = new Post($request->all());
+        $post->user_id = Auth::user()->id;
         $post->save();
 
         return redirect(route('post.list'))->with('notif', 'Post successfully created');
@@ -38,6 +40,7 @@ class PostController extends Controller
 
     public function edit (Post $post): View
     {
+//        $this->authorize('edit', $post);
         return View('posts.edit', ['post' => $post]);
     }
 
