@@ -3,18 +3,8 @@
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/', 'index');
@@ -31,6 +21,16 @@ Route::controller(PostController::class)
         Route::get('/edit/{post}', 'edit')->name('edit');
         Route::post('/update/{post}', 'update')->name('update');
         Route::get('/delete/{post}', 'delete')->name('delete');
+});
+
+Route::controller(UserController::class)
+    ->name('user.')
+    ->group(function () {
+        Route::get('/register', 'register')->name('register');
+        Route::post('/register', 'store')->name('store');
+        Route::get('/login', 'index')->name('login');
+        Route::post('/login', 'auth')->name('auth');
+        Route::get('/logout', 'logout')->name('logout');
     });
 
 Route::resource('review', ReviewController::class);

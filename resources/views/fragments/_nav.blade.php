@@ -27,7 +27,23 @@
                         <li><a class="dropdown-item" href="{{ route('review.index') }}">List</a></li>
                     </ul>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        User
+                    </a>
+                    <ul class="dropdown-menu">
+                        @if (Auth::user())
+                            <li><a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a></li>
+                        @else
+                            <li><a class="dropdown-item" href="{{ route('user.login') }}">Login</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.register') }}">Register</a></li>
+                        @endif
+                    </ul>
+                </li>
             </ul>
+            @if (Auth::user())
+                <p>{{ Auth::user()->email }}</p>
+            @endif
         </div>
     </div>
 </nav>

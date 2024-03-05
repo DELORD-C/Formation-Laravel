@@ -31,11 +31,7 @@ class ReviewController extends Controller
             'rating' => 'required'
         ]);
 
-        $review = new Review();
-        $review->movie = $request->movie;
-        $review->body = $request->body;
-        $review->rating = $request->rating;
-
+        $review = new Review($request->all());
         $review->save();
 
         return redirect(route('review.index'))->with('notif', 'Review successfully created');

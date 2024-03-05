@@ -21,10 +21,7 @@ class PostController extends Controller
             'subject' => 'required'
         ]);
 
-        $post = new Post();
-        $post->subject = $request->subject;
-        $post->body = $request->body;
-
+        $post = new Post($request->all());
         $post->save();
 
         return redirect(route('post.list'))->with('notif', 'Post successfully created');
