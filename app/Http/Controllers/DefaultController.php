@@ -9,7 +9,7 @@ class DefaultController extends Controller
     public function index(): View
     {
         return view('default', [
-            "var" => '<h1>Hello World !</h1>'
+            "var" => 'Hello World !'
         ]);
     }
 

@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(DefaultController::class)->group(function () {
     Route::get('/', 'index');
-    Route::get('/random/{min?}/{max?}', 'random')->whereNumber(['min', 'max']);
+    Route::get('/random/{min?}/{max?}', 'random')->whereNumber(['min', 'max'])->name('random');
 });
 
 Route::controller(PostController::class)

@@ -27,7 +27,7 @@ class PostController extends Controller
 
         $post->save();
 
-        return redirect(route('post.list'));
+        return redirect(route('post.list'))->with('notif', 'Post successfully created');
     }
 
     public function list (Request $request): View
@@ -60,6 +60,6 @@ class PostController extends Controller
     {
         $post->delete();
 
-        return redirect(route('post.list'));
+        return redirect(route('post.list'))->with('notif', 'Post successfully deleted');
     }
 }
