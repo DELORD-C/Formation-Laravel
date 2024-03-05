@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Support\Facades\Gate;
@@ -25,6 +26,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         Gate::define('notAuth', function (?User $user) {
             if (empty($user)) {
+                return Response::allow();
+            }
+            return Response::deny();
+        });
+
+        Gate::define('auth', function (?User $user) {
+            if (!empty($user)) {
+                return Response::allow();
+            }
+            return Response::deny();
+        });
+
+        Gate::define('editPost', function (?User $user, Post $post) {
+            if (!empty($user) && $user->id === $post->user->id) {
                 return Response::allow();
             }
             return Response::deny();

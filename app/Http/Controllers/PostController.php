@@ -12,11 +12,13 @@ class PostController extends Controller
 {
     public function create(): View
     {
+        $this->authorize('auth');
         return view('posts.create');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('auth');
         $request->validate([
             'body' => 'required',
             'subject' => 'required'
@@ -40,12 +42,13 @@ class PostController extends Controller
 
     public function edit (Post $post): View
     {
-//        $this->authorize('edit', $post);
+        $this->authorize('editPost', $post);
         return View('posts.edit', ['post' => $post]);
     }
 
     public function update(Request $request, Post $post): RedirectResponse
     {
+        $this->authorize('editPost', $post);
         $request->validate([
             'body' => 'required',
             'subject' => 'required'
@@ -58,6 +61,7 @@ class PostController extends Controller
 
     public function delete(Post $post): RedirectResponse
     {
+        $this->authorize('editPost', $post);
         $post->delete();
 
         return redirect(route('post.list'))->with('notif', 'Post successfully deleted');

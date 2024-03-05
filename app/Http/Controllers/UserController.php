@@ -40,11 +40,13 @@ class UserController extends Controller
 
     public function register(): View
     {
+        $this->authorize('notAuth');
         return view('users.register');
     }
 
     public function store(Request $request): RedirectResponse
     {
+        $this->authorize('notAuth');
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',

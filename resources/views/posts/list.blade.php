@@ -8,6 +8,7 @@
             <th>Id</th>
             <th>Subject</th>
             <th>Body</th>
+            <th>Author</th>
             <th>Updated At</th>
             <th>Created At</th>
             <th>Actions</th>
@@ -17,15 +18,20 @@
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->subject }}</td>
                 <td>{{ $post->body }}</td>
+                <td>{{ $post->user->name }}</td>
                 <td>{{ date('d/m/Y H:i', strtotime($post->updated_at)) }}</td>
                 <td>{{ date('d/m/Y H:i', strtotime($post->created_at)) }}</td>
+                @can('editPost', $post)
                 <td>
                     <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
                     <a class="btn btn-danger" href="{{ route('post.delete', $post->id) }}">Delete</a>
                 </td>
+                @endcan
             </tr>
         @endforeach
     </table>
     {!! $posts->links() !!}
+    @can('auth')
     <a class="btn btn-primary" href="{{ route('post.create') }}">Create</a>
+    @endcan
 @endsection

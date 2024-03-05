@@ -5,7 +5,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{ route('random') }}">Random</a>
                 </li>
@@ -14,7 +14,9 @@
                         Post
                     </a>
                     <ul class="dropdown-menu">
+                        @can('auth')
                         <li><a class="dropdown-item" href="{{ route('post.create') }}">Create</a></li>
+                        @endcan
                         <li><a class="dropdown-item" href="{{ route('post.list') }}">List</a></li>
                     </ul>
                 </li>
@@ -42,7 +44,7 @@
                 </li>
             </ul>
             @if (Auth::user())
-                <p>{{ Auth::user()->email }}</p>
+            <div class="navbar-text">{{ Auth::user()->email }} <i class="bi bi-person-circle"></i></div>
             @endif
         </div>
     </div>
