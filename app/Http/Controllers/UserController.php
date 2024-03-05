@@ -13,11 +13,13 @@ class UserController extends Controller
 {
     public function index(): View
     {
+        $this->authorize('notAuth');
         return view('users.login');
     }
 
     public function auth(Request $request): RedirectResponse
     {
+        $this->authorize('notAuth');
         $request->validate([
             'email' => 'required|email',
             'password' => 'required'
