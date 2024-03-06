@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DefaultController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
@@ -21,6 +22,7 @@ Route::controller(PostController::class)
         Route::get('/edit/{post}', 'edit')->name('edit');
         Route::post('/update/{post}', 'update')->name('update');
         Route::get('/delete/{post}', 'delete')->name('delete');
+        Route::get('/{post}', 'show')->name('show');
 });
 
 Route::controller(UserController::class)
@@ -34,6 +36,16 @@ Route::controller(UserController::class)
     });
 
 Route::resource('review', ReviewController::class);
+
+Route::controller(CommentController::class)
+    ->name('comment.')
+    ->prefix('/comment')
+    ->group(function () {
+        Route::post('/store/{post}', 'store')->name('store');
+        Route::get('/edit/{comment}', 'edit')->name('edit');
+        Route::post('/update/{comment}', 'update')->name('update');
+        Route::get('/delete/{comment}', 'delete')->name('delete');
+    });
 
 //Route::get('/random/1000', function () {
 //   return rand(0, 1000);

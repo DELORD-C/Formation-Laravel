@@ -66,4 +66,11 @@ class PostController extends Controller
 
         return redirect(route('post.list'))->with('notif', 'Post successfully deleted');
     }
+
+    public function show(Post $post): View
+    {
+        return view('posts.show', [
+            'post' => $post
+        ]);
+    }
 }

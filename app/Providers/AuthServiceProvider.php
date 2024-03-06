@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -40,6 +41,20 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('editPost', function (?User $user, Post $post) {
             if (!empty($user) && $user->id === $post->user->id) {
+                return Response::allow();
+            }
+            return Response::deny();
+        });
+
+        Gate::define('editComment', function (?User $user, Comment $comment) {
+            if (!empty($user) && $user->id === $comment->user->id) {
+                return Response::allow();
+            }
+            return Response::deny();
+        });
+
+        Gate::define('deleteComment', function (?User $user, Comment $comment) {
+            if (!empty($user) && ($user->id === $comment->user->id || $user->id === $comment->post->user->id)) {
                 return Response::allow();
             }
             return Response::deny();

@@ -9,6 +9,7 @@
             <th>Subject</th>
             <th>Body</th>
             <th>Author</th>
+            <th>Comments</th>
             <th>Updated At</th>
             <th>Created At</th>
             <th>Actions</th>
@@ -19,14 +20,16 @@
                 <td>{{ $post->subject }}</td>
                 <td>{{ $post->body }}</td>
                 <td>{{ $post->user->name }}</td>
+                <td>{{ count($post->comments) }}</td>
                 <td>{{ date('d/m/Y H:i', strtotime($post->updated_at)) }}</td>
                 <td>{{ date('d/m/Y H:i', strtotime($post->created_at)) }}</td>
-                @can('editPost', $post)
                 <td>
-                    <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
-                    <a class="btn btn-danger" href="{{ route('post.delete', $post->id) }}">Delete</a>
+                    <a class="btn btn-primary" href="{{ route('post.show', $post->id) }}">Show</a>
+                    @can('editPost', $post)
+                        <a class="btn btn-primary" href="{{ route('post.edit', $post->id) }}">Edit</a>
+                        <a class="btn btn-danger" href="{{ route('post.delete', $post->id) }}">Delete</a>
+                    @endcan
                 </td>
-                @endcan
             </tr>
         @endforeach
     </table>
