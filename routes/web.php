@@ -45,6 +45,7 @@ Route::controller(CommentController::class)
         Route::get('/edit/{comment}', 'edit')->name('edit');
         Route::post('/update/{comment}', 'update')->name('update');
         Route::get('/delete/{comment}', 'delete')->name('delete');
+        Route::get('/test', 'test')->name('test');
     });
 
 //Route::get('/random/1000', function () {

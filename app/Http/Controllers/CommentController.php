@@ -51,4 +51,9 @@ class CommentController extends Controller
 
         return redirect(route('post.show', $comment->post->id))->with('notif', 'Comment successfully deleted');
     }
+
+    public function test ()
+    {
+        return 'test';
+    }
 }

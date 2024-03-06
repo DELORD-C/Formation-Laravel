@@ -46,7 +46,7 @@
                     <td>{{ date('d/m/Y H:i', strtotime($comment->created_at)) }}</td>
                     <td>
                         @can('edit', $comment)
-                            <a class="btn btn-primary" href="{{ route('comment.edit', $comment->id) }}">Edit <i class="bi bi-pencil-square"></i></a>
+                            <a class="btn btn-primary comment-edit" data-action="{{ route('comment.update', $comment->id) }}">Edit <i class="bi bi-pencil-square"></i></a>
                         @endcan
                         @can('delete', $comment)
                             <a class="btn btn-danger" href="{{ route('comment.delete', $comment->id) }}">Delete <i class="bi bi-trash"></i></a>
