@@ -45,10 +45,10 @@
                     <td>{{ $comment->user->name }}</td>
                     <td>{{ date('d/m/Y H:i', strtotime($comment->created_at)) }}</td>
                     <td>
-                        @can('editComment', $comment)
+                        @can('edit', $comment)
                             <a class="btn btn-primary" href="{{ route('comment.edit', $comment->id) }}">Edit <i class="bi bi-pencil-square"></i></a>
                         @endcan
-                        @can('deleteComment', $comment)
+                        @can('delete', $comment)
                             <a class="btn btn-danger" href="{{ route('comment.delete', $comment->id) }}">Delete <i class="bi bi-trash"></i></a>
                         @endcan
                     </td>
