@@ -34,6 +34,7 @@
                         User
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('user.list') }}">List</a></li>
                         @if (Auth::user())
                             <li><a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a></li>
                         @else

@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
     public function toggle (Comment $comment) {
         $this->authorize('auth');
-        if (Auth::user()->hasLiked($comment)) {
-            $like = Auth::user()->getLike($comment);
+
+        /**
+         * @var $user User
+         **/
+        $user = Auth::user();
+        if ($user->hasLiked($comment)) {
+            $like = $user->getLike($comment);
             $like->delete();
         }
         else {

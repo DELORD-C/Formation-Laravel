@@ -76,4 +76,9 @@ class UserController extends Controller
 
         return redirect(route('user.login'));
     }
+
+    public function list(): View
+    {
+        return view('users.list', ['users' => User::all()]);
+    }
 }

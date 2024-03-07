@@ -34,6 +34,7 @@ Route::controller(UserController::class)
         Route::get('/login', 'index')->name('login');
         Route::post('/login', 'auth')->name('auth');
         Route::get('/logout', 'logout')->name('logout');
+        Route::get('/list', 'list')->name('list');
     });
 
 Route::resource('review', ReviewController::class);
