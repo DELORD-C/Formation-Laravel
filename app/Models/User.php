@@ -54,4 +54,19 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function likes(): HasMany
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public function hasLiked(Comment $comment): bool
+    {
+        return $this->likes()->where('comment_id', '=', $comment->id)->exists();
+    }
+
+    public function getLike(Comment $comment): ?Like
+    {
+        return $this->likes()->where('comment_id', '=', $comment->id)->first();
+    }
 }

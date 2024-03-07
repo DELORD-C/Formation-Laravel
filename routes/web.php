@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\UserController;
@@ -48,6 +49,9 @@ Route::controller(CommentController::class)
         Route::get('/test', 'test')->name('test');
     });
 
-//Route::get('/random/1000', function () {
-//   return rand(0, 1000);
-//});
+Route::controller(LikeController::class)
+    ->name('like.')
+    ->prefix('/like')
+    ->group(function () {
+        Route::get('/toggle/{comment}', 'toggle')->name('toggle');
+    });
