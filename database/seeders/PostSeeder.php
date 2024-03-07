@@ -9,8 +9,10 @@ use Illuminate\Spport\Facades\Hash;
 class PostSeeder extends Seeder {
     public function run(): void
     {
-        Post::factory()
-            ->count(5)
-            ->create();
+        if (count(Post::all()) < 10) {
+            Post::factory()
+                ->count(10 - count(Post::all()))
+                ->create();
+        }
     }
 }
