@@ -47,6 +47,7 @@
                     <td>{{ date('d/m/Y H:i', strtotime($comment->created_at)) }}</td>
                     <td>{{ count($comment->likes) }}</td>
                     <td>
+                        @can('auth')
                             <a class="btn btn-primary" href="{{ route('like.toggle', $comment->id) }}">
                                 Like
                                 @if(Auth::user()->hasLiked($comment))
@@ -55,6 +56,7 @@
                                     <i class="bi bi-heart"></i>
                                 @endif
                             </a>
+                        @endcan
                         @can('edit', $comment)
                             <a class="btn btn-primary comment-edit" data-action="{{ route('comment.update', $comment->id) }}">Edit <i class="bi bi-pencil-square"></i></a>
                         @endcan
