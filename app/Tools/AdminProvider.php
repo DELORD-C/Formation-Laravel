@@ -10,7 +10,7 @@ class AdminProvider
 {
     public function getRole(): \StdClass|Role
     {
-        return DB::table('roles')->where('name', '=', 'Admin')->first();
+        return Role::where('name', '=', 'Admin')->first();
     }
 
     public function getRoleId(): int
@@ -20,7 +20,7 @@ class AdminProvider
 
     public function getUser(): \StdClass|User
     {
-        return DB::table('users')->where('name', '=', 'Admin')->first();
+        return User::where('name', '=', 'Admin')->first();
     }
 
     public function getUserId(): int
