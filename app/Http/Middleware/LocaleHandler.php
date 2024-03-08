@@ -13,10 +13,10 @@ class LocaleHandler
         if (!session()->has('_locale')) {
             $browserLocale = substr($request->header('Accept-Language'), 0, 2);
             if (in_array($browserLocale, ['fr', 'en'])) {
-                session()->set('_locale', $browserLocale);
+                session()->put('_locale', $browserLocale);
             }
             else {
-                session()->set('_locale', 'en');
+                session()->put('_locale', 'en');
             }
         }
         App::setLocale(session()->get('_locale'));
