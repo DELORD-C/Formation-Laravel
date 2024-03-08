@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminProvider
 {
-    public function getRole(): \StdClass|Role
+    public function getRole(): Role
     {
         return Role::where('name', '=', 'Admin')->first();
     }
@@ -18,7 +18,7 @@ class AdminProvider
         return $this->getRole()->id;
     }
 
-    public function getUser(): \StdClass|User
+    public function getUser(): User
     {
         return User::where('name', '=', 'Admin')->first();
     }
