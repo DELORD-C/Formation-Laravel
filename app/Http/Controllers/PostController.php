@@ -35,13 +35,13 @@ class PostController extends Controller
 
     public function list (Request $request): View
     {
-        if (Cache::has('post_list')) {
-            $posts = Cache::get('post_list');
-        }
-        else {
-            $posts = Post::paginate(5);
-            Cache::add('post_list', $posts);
-        }
+//        if (Cache::has('post_list')) {
+//            $posts = Cache::get('post_list');
+//        }
+//        else {
+            $posts = Post::paginate(5); // Le cache casse la pagination
+//            Cache::add('post_list', $posts);
+//        }
 
         return view('posts.list', [
             'posts' => $posts
