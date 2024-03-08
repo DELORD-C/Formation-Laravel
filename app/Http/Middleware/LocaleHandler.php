@@ -10,9 +10,16 @@ class LocaleHandler
 {
     public function handle(Request $request, Closure $next)
     {
-        if (session()->has('_locale')) {
-            App::setLocale(session()->get('_locale'));
+        if (!session()->has('_locale')) {
+            $browserLocale = substr($request->header('Accept-Language'), 0, 2);
+            if (in_array($browserLocale, ['fr', 'en'])) {
+                session()->set('_locale', $browserLocale);
+            }
+            else {
+                session()->set('_locale', 'en');
+            }
         }
+        App::setLocale(session()->get('_locale'));
         return $next($request);
     }
 }
