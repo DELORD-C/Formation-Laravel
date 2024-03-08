@@ -40,11 +40,21 @@ class AuthServiceProvider extends ServiceProvider
             return Response::deny();
         });
 
+        Gate::define('admin', function (?User $user) {
+            return Response::deny();
+        });
+
         Gate::define('editPost', function (?User $user, Post $post) {
             if (!empty($user) && $user->id === $post->user->id) {
                 return Response::allow();
             }
             return Response::deny();
+        });
+
+        Gate::before(function(User $user) {
+            if ($user->isAdmin()) {
+                return true;
+            }
         });
     }
 }

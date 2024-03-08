@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Tools\AdminProvider;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
@@ -79,6 +81,29 @@ class UserController extends Controller
 
     public function list(): View
     {
+        $this->authorize('admin');
         return view('users.list', ['users' => User::all()]);
+    }
+
+    public function toggleAdmin(User $user, AdminProvider $admin): RedirectResponse
+    {
+        $this->authorize('admin');
+
+        if ($user->id !== Auth::user()->id) {
+            if ($user->isAdmin()) {
+                DB::table('role_user')
+                    ->where('user_id', '=', $user->id)
+                    ->where('role_id', '=', $admin->getRoleId())
+                    ->delete();
+            }
+            else {
+                DB::table('role_user')->insert([
+                    'user_id' => $user->id,
+                    'role_id' => $admin->getRoleId()
+                ]);
+            }
+        }
+
+        return redirect(route('user.list'));
     }
 }
