@@ -57,3 +57,11 @@ Route::controller(LikeController::class)
     ->group(function () {
         Route::get('/toggle/{comment}', 'toggle')->name('toggle');
     });
+
+Route::get('/locale/{locale}', function (string $locale) {
+    if (!in_array($locale, ['fr', 'en'])) {
+        return redirect()->back()->with('error', 'Unsupported locale');
+    }
+    session()->put('_locale', $locale);
+    return redirect()->back();
+})->name('locale');

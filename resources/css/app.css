@@ -1,8 +1,6 @@
-.w-5 {
-    width: 15px;
-}
-
-
-.h-5 {
-    height: 15px;
+.nav-icon {
+    display: flex!important;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
