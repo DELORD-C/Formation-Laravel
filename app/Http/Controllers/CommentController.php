@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\CommentSubmitted;
 use App\Models\Comment;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
@@ -22,6 +23,7 @@ class CommentController extends Controller
         $comment->user_id = Auth::user()->id;
         $comment->post_id = $post->id;
         $comment->save();
+        CommentSubmitted::dispatch($comment);
 
         return redirect(route('post.show', $post->id))->with('notif', 'Comment successfully created');
     }

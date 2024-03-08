@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46242710a3af31406d8a838f7c23fcf0",
+    "content-hash": "0d17d6fb1ab19cfea65150b7bf14b051",
     "packages": [
         {
             "name": "brick/math",
@@ -1843,6 +1843,57 @@
                 "source": "https://github.com/laravel/tinker/tree/v2.9.0"
             },
             "time": "2024-01-04T16:10:04+00:00"
+        },
+        {
+            "name": "laravelflare/mail-debug",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelflare/mail-debug.git",
+                "reference": "337642f5afd6d585ccfe9fd16efa95a60db9500d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelflare/mail-debug/zipball/337642f5afd6d585ccfe9fd16efa95a60db9500d",
+                "reference": "337642f5afd6d585ccfe9fd16efa95a60db9500d",
+                "shasum": ""
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.1",
+                "orchestra/testbench": "~3.1",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LaravelFlare\\MailDebug\\": "src/MailDebug"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Laravel Flare",
+                    "homepage": "https://github.com/laravelflare"
+                },
+                {
+                    "name": "Aden Fraser",
+                    "email": "aden@jacobbailey.com",
+                    "homepage": "https://github.com/AdenFraser"
+                }
+            ],
+            "homepage": "https://github.com/laravelflare/mail-debug",
+            "keywords": [
+                "flare",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravelflare/mail-debug/issues",
+                "source": "https://github.com/laravelflare/mail-debug/tree/master"
+            },
+            "time": "2017-04-21T09:51:52+00:00"
         },
         {
             "name": "league/commonmark",
