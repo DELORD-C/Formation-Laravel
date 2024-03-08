@@ -6,6 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -27,13 +28,20 @@ class PostController extends Controller
         $post = new Post($request->all());
         $post->user_id = Auth::user()->id;
         $post->save();
+        Cache::delete('post_list');
 
         return redirect(route('post.list'))->with('notif', 'Post successfully created');
     }
 
     public function list (Request $request): View
     {
-        $posts = Post::paginate(5);
+        if (Cache::has('post_list')) {
+            $posts = Cache::get('post_list');
+        }
+        else {
+            $posts = Post::paginate(5);
+            Cache::add('post_list', $posts);
+        }
 
         return view('posts.list', [
             'posts' => $posts
@@ -55,6 +63,7 @@ class PostController extends Controller
         ]);
 
         $post->update($request->all());
+        Cache::delete('post_list');
 
         return redirect(route('post.list'))->with('notif', 'Post successfully updated');
     }
@@ -63,6 +72,7 @@ class PostController extends Controller
     {
         $this->authorize('editPost', $post);
         $post->delete();
+        Cache::delete('post_list');
 
         return redirect(route('post.list'))->with('notif', 'Post successfully deleted');
     }
